@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rajasthan Royals | IPL 2027 Auction Analytics</title>
+<style>
+:root{--navy:#14243b;--navy2:#203b5d;--pink:#e84b80;--teal:#168b83;--ink:#172235;--muted:#687588;--line:#e3e8ef;--bg:#f4f6fa;--white:#fff;--gold:#b77a16;--soft:#edf3f8}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+.top{background:var(--navy);color:#fff;padding:13px max(20px,calc((100% - 1240px)/2));display:flex;justify-content:space-between;align-items:center;gap:16px;position:sticky;top:0;z-index:10}.brand{font-weight:850;letter-spacing:.07em;font-size:12px}.brand span{color:#ff80aa}.nav{display:flex;gap:15px;flex-wrap:wrap}.nav a{color:#d8e3f0;text-decoration:none;font-size:12px}.nav a:hover{color:#fff}
+.wrap{max-width:1240px;margin:auto;padding:26px 22px 60px}.hero{background:linear-gradient(120deg,#14243b,#244466 68%,#22636a);color:white;border-radius:20px;padding:34px;position:relative;overflow:hidden}.hero:after{content:"RR";position:absolute;right:24px;top:-55px;font-size:210px;font-weight:900;color:#ffffff0b}.eyebrow{font-size:10px;letter-spacing:.17em;text-transform:uppercase;color:#ff91b5;font-weight:800}.hero h1{font-size:clamp(28px,4vw,43px);line-height:1.08;margin:10px 0;max-width:780px}.hero p{max-width:780px;color:#dce7f3;margin:0}.meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}.pill{border:1px solid #ffffff40;border-radius:99px;padding:5px 10px;font-size:11px;color:#f3f7fc;background:#ffffff0b}
+.section{margin-top:28px;scroll-margin-top:75px}.head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:13px}.head h2{margin:0;color:var(--navy);font-size:20px}.head p{margin:3px 0 0;color:var(--muted);font-size:12px}
+.grid{display:grid;gap:13px}.kpis{grid-template-columns:repeat(4,minmax(0,1fr))}.card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:16px;box-shadow:0 3px 12px #17203308}.label{font-size:10px;color:var(--muted);font-weight:800;letter-spacing:.07em;text-transform:uppercase}.value{font-size:27px;font-weight:850;color:var(--navy);letter-spacing:-.04em;margin-top:3px}.sub{font-size:11px;color:var(--muted)}
+.notice{padding:13px 15px;border:1px solid #ead6a9;background:#fff8e9;border-radius:12px;color:#664c1a;font-size:12px}.notice b{color:#4b360d}.blue-note{background:#edf4fa;border-color:#d3e1ee;color:#29445d}
+.two{grid-template-columns:1fr 1fr}.three{grid-template-columns:repeat(3,1fr)}
+.rank-list{display:grid;gap:9px}.rank{display:grid;grid-template-columns:25px minmax(120px,1fr) minmax(90px,1.25fr) 54px;gap:9px;align-items:center}.rank .n{font-size:11px;font-weight:800;color:#65748a}.rank .name{font-size:12px;font-weight:750}.bar{height:9px;background:#edf1f5;border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,#244a70,#e84b80);border-radius:99px}.score{text-align:right;font-variant-numeric:tabular-nums;font-weight:800;font-size:12px}
+.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0}.toolbar input,.toolbar select{border:1px solid var(--line);background:#fff;border-radius:9px;padding:9px 11px;color:var(--ink);font:inherit;font-size:12px}.toolbar input{min-width:230px;flex:1}
+.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:13px;background:white}table{border-collapse:collapse;width:100%;min-width:720px;font-size:12px}th{background:#edf2f7;color:#34445b;text-align:left;font-size:10px;letter-spacing:.05em;text-transform:uppercase;padding:10px 11px;position:sticky;top:0}td{padding:10px 11px;border-top:1px solid #edf0f4;vertical-align:top}tbody tr:hover{background:#fafcff}.num{font-variant-numeric:tabular-nums;white-space:nowrap}.tag{display:inline-block;border-radius:99px;padding:3px 7px;background:#edf3f8;color:#37516a;font-size:10px;font-weight:750}.tag.pink{background:#fceaf1;color:#9e3159}.tag.teal{background:#e5f4f1;color:#176b64}
+.cards{grid-template-columns:repeat(2,1fr)}.candidate{display:flex;flex-direction:column;gap:7px}.candidate h3{font-size:14px;margin:0;color:var(--navy)}.candidate .metric{font-weight:800;color:#1e5a73}.candidate p{margin:0;color:#58677a;font-size:12px}.candidate .why{padding-top:7px;border-top:1px solid var(--line)}
+.steps{counter-reset:step;display:grid;gap:9px}.step{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start}.step:before{counter-increment:step;content:counter(step);width:26px;height:26px;border-radius:50%;background:#e8eff6;color:#1d496d;font-weight:850;display:grid;place-items:center}.step b{color:var(--navy)}
+footer{margin-top:30px;padding:18px 2px;color:#738095;font-size:11px;border-top:1px solid var(--line)}
+@media(max-width:850px){.kpis{grid-template-columns:repeat(2,1fr)}.two,.three,.cards{grid-template-columns:1fr}.nav{display:none}.hero{padding:25px}.hero:after{font-size:140px}.rank{grid-template-columns:22px minmax(100px,1fr) minmax(60px,1fr) 48px}}
+@media(max-width:480px){.wrap{padding:16px 12px 40px}.kpis{gap:8px}.card{padding:12px}.value{font-size:23px}.rank{grid-template-columns:20px minmax(90px,1fr) 1fr 45px;gap:6px}.rank .name{font-size:11px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="brand">RAJASTHAN ROYALS <span>•</span> IPL 2027 ANALYTICS</div><nav class="nav"><a href="#overview">Overview</a><a href="#method">Methodology</a><a href="#batters">Batters</a><a href="#bowlers">Bowlers</a><a href="#auction">Auction plan</a><a href="#limits">Limitations</a></nav></header>
+<main class="wrap">
+<section class="hero">
+<div class="eyebrow">SupeRR Selector · Season 2</div>
+<h1>Pressure performance, translated into auction decisions.</h1>
+<p>An interactive companion to the IPL 2027 submission report. Explore the historical pressure rankings, compare full-pool candidates, and review how player profiles could address Rajasthan Royals' potential role requirements.</p>
+<div class="meta"><span class="pill">Dataset: 2022–2026</span><span class="pill">809 decided matches</span><span class="pill">191,559 regular deliveries</span><span class="pill">188,771 modeled deliveries</span><span class="pill">Historical performance ≠ availability</span></div>
+</section>
+
+<section id="overview" class="section">
+<div class="head"><div><h2>At a glance</h2><p>Core scope and headline results from the report.</p></div></div>
+<div class="grid kpis">
+<div class="card"><div class="label">Matches analysed</div><div class="value">809</div><div class="sub">361 IPL · 448 T20I</div></div>
+<div class="card"><div class="label">Modeled deliveries</div><div class="value">188,771</div><div class="sub">After active in-play filtering</div></div>
+<div class="card"><div class="label">Batter pool</div><div class="value">205</div><div class="sub">Eligible players in full pool</div></div>
+<div class="card"><div class="label">Bowler pool</div><div class="value">160</div><div class="sub">Eligible players in full pool</div></div>
+</div>
+<div class="notice" style="margin-top:13px"><b>How to read this dashboard:</b> Top 10 rankings are calculated from the supplied historical dataset. They are not filtered for current franchise, retirement, registration or auction status. The ordering is exploratory: uncertainty overlaps and persistence diagnostics caution against treating small rank gaps as decisive.</div>
+</section>
+
+<section id="method" class="section">
+<div class="head"><div><h2>Methodology overview</h2><p>From pre-delivery match state to player-level pressure performance.</p></div></div>
+<div class="grid three">
+<div class="card"><div class="label">01 · Define pressure</div><h3>Pre-delivery context</h3><p class="sub">Pressure is operationalised from match state before each delivery: innings context, phase, wickets/resources, target/par position and chase situation. No post-delivery information is used to define the state.</p></div>
+<div class="card"><div class="label">02 · Estimate impact</div><h3>Contextual counterfactuals</h3><p class="sub">Observed outcomes are compared with out-of-fold expected outcomes conditioned on delivery and match context. Wicket value is state-dependent; player residuals are shrunk to reduce small-sample noise.</p></div>
+<div class="card"><div class="label">03 · Rank cautiously</div><h3>Composite performance</h3><p class="sub">The report combines pressure impact, dot-ball contribution and match-to-match consistency, then uses match-cluster bootstrap intervals and Top 10 inclusion probability to show uncertainty.</p></div>
+</div>
+</section>
+
+<section id="batters" class="section">
+<div class="head"><div><h2>Top 10 batters under pressure</h2><p>Exact ranking and point ratings from the report. Historical performance, not availability.</p></div><span class="tag pink">Exploratory order</span></div>
+<div class="grid two">
+<div class="card"><div class="label">Rating profile</div><div class="rank-list" id="batChart"></div></div>
+<div class="card"><div class="label">How to interpret</div><p class="sub">The model's point rating determines the displayed order. 90% match-cluster bootstrap intervals are wide and overlap across much of the list. Dinesh Karthik remains included because this is a historical dataset ranking, not an actionable auction list.</p><p class="sub"><b>Top observed point rating:</b> Suryakumar Yadav (74.80). <b>Next:</b> Yashasvi Jaiswal (71.64) and Pathum Nissanka (70.46).</p></div>
+</div>
+<div class="toolbar"><input id="batSearch" placeholder="Search batter name or role…" oninput="renderTable('bat')"><select id="batSort" onchange="renderTable('bat')"><option value="rank">Original rank</option><option value="rating">Rating: high to low</option></select></div>
+<div class="table-wrap"><table><thead><tr><th>Rank</th><th>Batter</th><th>Rating</th><th>90% interval</th><th>HP balls</th><th>HP matches</th><th>HP strike rate</th><th>IPL HP share</th></tr></thead><tbody id="batRows"></tbody></table></div>
+</section>
+
+<section id="bowlers" class="section">
+<div class="head"><div><h2>Top 10 bowlers under pressure</h2><p>Exact ranking and point ratings from the report.</p></div><span class="tag teal">Exploratory order</span></div>
+<div class="grid two">
+<div class="card"><div class="label">Rating profile</div><div class="rank-list" id="bowlChart"></div></div>
+<div class="card"><div class="label">How to interpret</div><p class="sub">Jasprit Bumrah and Sunil Narine form the clearest top tier in the report's pairwise analysis. Positions 5–10 are much less separable and should be treated as a flexible group, not a precise priority ladder.</p><p class="sub">Bowlers' economy, wicket and dot-ball metrics are descriptive high-pressure sample statistics, not isolated causal effects.</p></div>
+</div>
+<div class="toolbar"><input id="bowlSearch" placeholder="Search bowler name or role…" oninput="renderTable('bowl')"><select id="bowlSort" onchange="renderTable('bowl')"><option value="rank">Original rank</option><option value="rating">Rating: high to low</option></select></div>
+<div class="table-wrap"><table><thead><tr><th>Rank</th><th>Bowler</th><th>Rating</th><th>90% interval</th><th>HP balls</th><th>HP matches</th><th>HP economy</th><th>Wicket %</th><th>Dot %</th><th>IPL HP share</th></tr></thead><tbody id="bowlRows"></tbody></table></div>
+</section>
+
+<section id="auction" class="section">
+<div class="head"><div><h2>IPL 2027 auction: role-led recommendations</h2><p>Use performance evidence to identify profiles; verify actual squad gaps and availability separately.</p></div></div>
+<div class="notice blue-note"><b>Outside-dataset boundary:</b> The supplied data cannot verify the 2027 RR squad, player retention/release, trades, retirement, registration, purse or auction availability. The following is a conditional scouting framework, not a claim that any player is available.</div>
+<div class="grid cards" style="margin-top:13px">
+<div class="card candidate"><span class="tag pink">Priority role · Indian finishing</span><h3>Shashank Singh</h3><div class="metric">Pool #10 · Rating 66.00</div><p>159 high-pressure balls; HP strike rate 176.1; all observed HP exposure in IPL.</p><p class="why"><b>RR fit:</b> A domestic finishing profile could strengthen the lower middle order and preserve overseas flexibility. Pursue only if the final squad has a genuine finisher vacancy and he is registered and available.</p></div>
+<div class="card candidate"><span class="tag pink">Priority role · Death bowling</span><h3>Matheesha Pathirana</h3><div class="metric">Bowler #3 · Rating 69.01</div><p>412 HP balls; HP wicket rate 7.82%; HP economy 9.15.</p><p class="why"><b>RR fit:</b> Specialist death-overs wicket-taking profile. Review the economy trade-off, execution consistency, fitness, overseas-slot impact and price before prioritising.</p></div>
+<div class="card candidate"><span class="tag">Role · Powerplay seam</span><h3>Bhuvneshwar Kumar</h3><div class="metric">Bowler #4 · Rating 66.33</div><p>776 HP balls; dot-ball rate 41.8%; HP economy 8.09.</p><p class="why"><b>RR fit:</b> Experienced new-ball control profile with the largest HP sample among the listed bowlers. Relevant if RR need a powerplay seam option.</p></div>
+<div class="card candidate"><span class="tag">Role · Death-overs alternatives</span><h3>Mustafizur Rahman / Nathan Ellis</h3><div class="metric">#6 · 64.50 / #11 · 61.80</div><p>Mustafizur: 627 HP balls, 25% IPL HP share. Ellis: 373 HP balls, 33% IPL HP share.</p><p class="why"><b>RR fit:</b> Alternative pace profiles for cutters, slower balls and death execution. Mustafizur's limited IPL share makes format translation an important validation step.</p></div>
+<div class="card candidate"><span class="tag">Role · Middle-overs spin control</span><h3>Mitchell Santner</h3><div class="metric">Bowler #8 · Rating 63.05</div><p>302 HP balls; economy 6.16; dot-ball rate 43.8%; 36% IPL HP share.</p><p class="why"><b>RR fit:</b> Left-arm spin control profile. Validate IPL role translation and compare with domestic spin options and the final squad balance.</p></div>
+<div class="card candidate"><span class="tag">Role · Finisher alternatives</span><h3>David Miller / Ashutosh Sharma</h3><div class="metric">Batter #12 · 63.73 / #34 · 56.94</div><p>Miller: 414 HP balls. Ashutosh: 168 HP balls, entirely IPL HP exposure.</p><p class="why"><b>RR fit:</b> Miller offers an experienced left-handed finishing profile; Ashutosh offers a domestic lower-order hitting profile. Choose according to price, squad composition and availability.</p></div>
+</div>
+<div class="section">
+<div class="head"><div><h2>Full-pool candidate table</h2><p>Ordered by original full-pool rank within batting and bowling groups. Confirmed 2026 RR squad assets are shown separately and excluded from acquisition recommendations.</p></div></div>
+<div class="toolbar"><input id="candidateSearch" placeholder="Search player, role or skill…" oninput="renderCandidates()"><select id="candidateType" onchange="renderCandidates()"><option value="all">All candidates</option><option value="Batter">Batters</option><option value="Bowler">Bowlers</option></select></div>
+<div class="table-wrap"><table><thead><tr><th>Type</th><th>Pool rank</th><th>Player</th><th>Rating</th><th>90% interval</th><th>HP balls</th><th>IPL HP share</th><th>Potential squad contribution</th></tr></thead><tbody id="candidateRows"></tbody></table></div>
+</div>
+<div class="section">
+<div class="head"><div><h2>Existing RR squad assets — not auction targets</h2><p>These players appear in the 2026 RR squad baseline. Their 2027 retention status must be checked separately.</p></div></div>
+<div class="grid two">
+<div class="card candidate"><span class="tag teal">RR 2026 squad asset</span><h3>Donovan Ferreira</h3><div class="metric">Batter pool #13 · Rating 63.21</div><p>123 high-pressure balls; 45% IPL share.</p><p class="why"><b>Squad implication:</b> Assess his finishing / wicketkeeping utility as an existing squad option before considering any external acquisition for the same role. Do not list him as a player RR needs to buy.</p><p class="sub">2027 status: verify official retention / release information.</p></div>
+<div class="card candidate"><span class="tag teal">RR 2026 squad asset</span><h3>Sandeep Sharma</h3><div class="metric">Bowler pool #45 · Rating 52.13</div><p>331 high-pressure balls; 100% IPL share.</p><p class="why"><b>Squad implication:</b> Evaluate his Indian seam and variation role as part of the existing bowling baseline. Do not list him as a new auction acquisition.</p><p class="sub">2027 status: verify official retention / release information.</p></div>
+</div></div>
+<div class="card" style="margin-top:13px"><div class="label">Suggested auction decision sequence</div><div class="steps" style="margin-top:12px">
+<div class="step"><div><b>Freeze the actual squad.</b><br><span class="sub">Use official 2027 retention and release information to identify genuine role vacancies.</span></div></div>
+<div class="step"><div><b>Map vacancies to profiles.</b><br><span class="sub">Prioritise only unfilled roles: Indian finisher, death pace, powerplay seam or middle-overs spin control.</span></div></div>
+<div class="step"><div><b>Build alternatives.</b><br><span class="sub">Compare at least two candidates per role using rating, interval, IPL exposure and role evidence.</span></div></div>
+<div class="step"><div><b>Apply availability and price gates.</b><br><span class="sub">Verify registration, availability, purse, overseas slots, fitness and expected price from authoritative sources and scouting.</span></div></div>
+</div></div>
+</section>
+
+<section id="limits" class="section">
+<div class="head"><div><h2>Reliability, limitations & reproducibility</h2><p>Important caveats for decision-makers.</p></div></div>
+<div class="grid two">
+<div class="card"><h3>What the analysis supports</h3><p class="sub">Historical pressure-performance comparisons within the supplied 2022–2026 dataset; point ratings, bootstrap intervals, exposure counts, inferred roles and full-pool candidate screening.</p><h3 style="margin-top:15px">What it does not support</h3><p class="sub">Current player availability, contractual status, future performance, auction prices, official role designation, or a definitive ranking of closely clustered players.</p></div>
+<div class="card"><h3>Key limitations</h3><ul class="sub"><li>Modest HP sample sizes and overlapping uncertainty intervals.</li><li>Extras schema cannot directly reconstruct multi-run overthrows on wides/byes; prior audit bounded economy-rate distortion at up to 0.12 RPO.</li><li>IPL/T20I format translation may be imperfect.</li><li>Pressure is a pre-delivery operational proxy, not a psychological measure.</li><li>Roles are inferred from observed usage, not official designations.</li></ul></div>
+</div>
+<div class="notice" style="margin-top:13px"><b>Reproducibility disclosure:</b> The companion analysis.py uses seed 20261113, but its current output does not exactly reproduce the leaderboard printed in the report. The script and source CSVs are supplied for audit/rerunning; exact end-to-end reproduction is not claimed without the matching frozen code/configuration snapshot.</div>
+</section>
+<footer>Rajasthan Royals · IPL 2027 Auction Analytics · SupeRR Selector Season 2<br>Dashboard companion to the submission PDF. All rankings shown here are historical dataset-derived outputs; auction recommendations are conditional role-fit interpretations.</footer>
+</main>
+<script>
+const bat=[
+{r:1,n:"Suryakumar Yadav",v:74.80,ci:"61.6–86.3",b:481,m:47,sr:"176.3",ipl:"66%",role:"Top / middle"},
+{r:2,n:"Yashasvi Jaiswal",v:71.64,ci:"57.6–85.7",b:252,m:32,sr:"177.4",ipl:"96%",role:"Opener"},
+{r:3,n:"Pathum Nissanka",v:70.46,ci:"58.7–80.8",b:315,m:23,sr:"157.1",ipl:"13%",role:"Opener"},
+{r:4,n:"Tim David",v:70.21,ci:"53.9–85.7",b:429,m:52,sr:"170.2",ipl:"63%",role:"Finisher / middle"},
+{r:5,n:"Virat Kohli",v:68.35,ci:"56.6–79.1",b:313,m:25,sr:"161.3",ipl:"77%",role:"Opener"},
+{r:6,n:"Heinrich Klaasen",v:67.00,ci:"51.4–80.1",b:276,m:31,sr:"168.8",ipl:"81%",role:"Finisher / middle"},
+{r:7,n:"Dinesh Karthik",v:66.78,ci:"50.8–81.3",b:294,m:38,sr:"177.6",ipl:"72%",role:"Finisher / middle"},
+{r:8,n:"Marcus Stoinis",v:66.49,ci:"49.8–82.4",b:276,m:42,sr:"180.4",ipl:"68%",role:"Finisher / middle"},
+{r:9,n:"Nicholas Pooran",v:66.03,ci:"51.7–82.6",b:413,m:47,sr:"162.0",ipl:"67%",role:"Top / middle"},
+{r:10,n:"Shashank Singh",v:66.00,ci:"52.3–79.6",b:159,m:23,sr:"176.1",ipl:"100%",role:"Finisher / middle"}
+];
+const bowl=[
+{r:1,n:"Jasprit Bumrah",v:79.68,ci:"67.4–90.7",b:531,m:56,eco:"7.42",wk:"5.62%",dot:"41.3%",ipl:"67%",role:"Pace · all phase"},
+{r:2,n:"Sunil Narine",v:76.80,ci:"67.8–85.2",b:300,m:33,eco:"6.04",wk:"7.12%",dot:"40.7%",ipl:"100%",role:"Spin · middle"},
+{r:3,n:"Matheesha Pathirana",v:69.01,ci:"57.7–80.1",b:412,m:35,eco:"9.15",wk:"7.82%",dot:"36.3%",ipl:"58%",role:"Pace · death"},
+{r:4,n:"Bhuvneshwar Kumar",v:66.33,ci:"55.7–77.3",b:776,m:66,eco:"8.09",wk:"6.38%",dot:"41.8%",ipl:"69%",role:"Pace · powerplay"},
+{r:5,n:"Kuldeep Yadav",v:64.60,ci:"55.2–73.3",b:449,m:46,eco:"6.66",wk:"6.74%",dot:"37.7%",ipl:"73%",role:"Spin · middle"},
+{r:6,n:"Mustafizur Rahman",v:64.50,ci:"53.2–75.9",b:627,m:58,eco:"7.71",wk:"6.01%",dot:"40.7%",ipl:"25%",role:"Pace · death"},
+{r:7,n:"Rashid Khan",v:63.66,ci:"53.9–73.6",b:694,m:64,eco:"6.77",wk:"6.44%",dot:"38.5%",ipl:"49%",role:"Spin · middle"},
+{r:8,n:"Mitchell Santner",v:63.05,ci:"54.2–72.1",b:302,m:31,eco:"6.16",wk:"7.53%",dot:"43.8%",ipl:"36%",role:"Spin · middle"},
+{r:9,n:"Varun Chakravarthy",v:61.97,ci:"53.0–71.4",b:464,m:45,eco:"6.76",wk:"7.02%",dot:"44.1%",ipl:"61%",role:"Spin · middle"},
+{r:10,n:"Mohsin Khan",v:61.93,ci:"49.2–74.6",b:192,m:19,eco:"7.16",wk:"8.29%",dot:"46.4%",ipl:"100%",role:"Pace · powerplay"}
+];
+const candidates=[
+["Batter",10,"Shashank Singh",66.00,"52.32–79.64",159,"100%","Domestic finishing profile; HP SR 176.1."],
+["Batter",12,"David Miller",63.73,"51.50–74.65",414,"83%","Left-handed finishing option."],
+["Batter",14,"Ryan Rickelton",62.22,"47.19–77.40",120,"38%","Left-handed top-order / wicketkeeping profile."],
+["Batter",15,"Shreyas Iyer",62.10,"46.41–77.83",253,"76%","Indian middle-order profile."],
+["Batter",17,"Shubman Gill",61.42,"50.55–72.07",366,"84%","Top-order anchor profile."],
+["Batter",28,"Ishan Kishan",58.30,"45.09–70.80",400,"93%","Aggressive left-handed top-order / keeper profile."],
+["Batter",34,"Ashutosh Sharma",56.94,"42.50–70.57",168,"100%","Domestic lower-order hitting depth."],
+["Batter",43,"Jos Buttler",54.70,"39.02–69.09",302,"60%","High-ceiling opener / finisher profile."],
+["Bowler",11,"Nathan Ellis",61.80,"53.89–70.66",373,"33%","Death-overs pace option."],
+["Bowler",12,"Harshal Patel",61.14,"50.42–72.39",625,"72%","Slower-ball / death role profile."],
+["Bowler",14,"Axar Patel",58.71,"49.62–67.87",540,"37%","Spin / all-round profile."],
+["Bowler",18,"Josh Hazlewood",58.06,"45.65–69.76",454,"61%","New-ball and hard-length seam profile."],
+["Bowler",21,"Prasidh Krishna",57.05,"45.77–67.99",338,"85%","Indian pace / hit-the-deck profile."],
+["Bowler",29,"Trent Boult",53.93,"44.06–65.26",486,"88%","Left-arm new-ball profile."],
+["Bowler",56,"Yuzvendra Chahal",49.87,"38.40–60.25",582,"70%","Attacking wrist-spin profile."]
+];
+function chart(id,data){let max=Math.max(...data.map(x=>x.v));document.getElementById(id).innerHTML=data.map(x=>`<div class="rank"><div class="n">${x.r}</div><div class="name">${x.n}</div><div class="bar"><i style="width:${(x.v/max*100).toFixed(1)}%"></i></div><div class="score">${x.v.toFixed(2)}</div></div>`).join("")}
+function renderTable(type){let isB=type==="bat",data=isB?bat:bowl,search=document.getElementById(type+"Search").value.toLowerCase(),sort=document.getElementById(type+"Sort").value;data=data.filter(x=>(x.n+" "+x.role).toLowerCase().includes(search));if(sort==="rating")data.sort((a,b)=>b.v-a.v);else data.sort((a,b)=>a.r-b.r);document.getElementById(type+"Rows").innerHTML=data.map(x=>isB?`<tr><td>${x.r}</td><td><b>${x.n}</b><br><span class="tag">${x.role}</span>${x.n==="Dinesh Karthik"?' <span class="tag pink">Historical benchmark</span>':""}</td><td class="num"><b>${x.v.toFixed(2)}</b></td><td class="num">${x.ci}</td><td>${x.b}</td><td>${x.m}</td><td>${x.sr}</td><td>${x.ipl}</td></tr>`:`<tr><td>${x.r}</td><td><b>${x.n}</b><br><span class="tag">${x.role}</span></td><td class="num"><b>${x.v.toFixed(2)}</b></td><td class="num">${x.ci}</td><td>${x.b}</td><td>${x.m}</td><td>${x.eco}</td><td>${x.wk}</td><td>${x.dot}</td><td>${x.ipl}</td></tr>`).join("")}
+function renderCandidates(){let q=document.getElementById("candidateSearch").value.toLowerCase(),typ=document.getElementById("candidateType").value;let rows=candidates.filter(x=>(typ==="all"||x[0]===typ)&&(x[2]+" "+x[7]).toLowerCase().includes(q));document.getElementById("candidateRows").innerHTML=rows.map(x=>`<tr><td><span class="tag ${x[0]==="Batter"?"pink":"teal"}">${x[0]}</span></td><td>#${x[1]}</td><td><b>${x[2]}</b></td><td class="num">${x[3].toFixed(2)}</td><td class="num">${x[4]}</td><td>${x[5]}</td><td>${x[6]}</td><td>${x[7]}</td></tr>`).join("")}
+chart("batChart",bat);chart("bowlChart",bowl);renderTable("bat");renderTable("bowl");renderCandidates();
+</script>
+</body></html>
